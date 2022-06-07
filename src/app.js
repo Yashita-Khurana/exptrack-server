@@ -8,6 +8,7 @@ const userRoute = require('./routes/users/usersRoute');
 const dotenv=require("dotenv");
 //importing the database into the server
 const dbConnect = require('./config/dbConnect');
+const incomeRoute = require('./routes/income/incomeRoute');
 
 // using express
 const app = express();
@@ -26,8 +27,11 @@ app.get('/',(req,res) => {
     res.json({msg:"welcome"});
 })
 
-//routes
+//users' routes
 app.use('/api/users',userRoute);
+
+//income routes
+app.use('/api/income',incomeRoute);
 
 //error
 app.use(errorHandler);
