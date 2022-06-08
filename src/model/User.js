@@ -45,6 +45,12 @@ const userSchema = new mongoose.Schema(
       this.password=await bcrypt.hash(this.password,salt);
       next();
     });
+
+    //verify password
+userSchema.methods.isPasswordMatch=async function(enteredPassword){
+  return await bcrypt.compare(enteredPassword,this.password);
+}
+
     
 
     //Compile schema into model

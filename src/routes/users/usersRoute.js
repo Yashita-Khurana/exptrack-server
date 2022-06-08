@@ -7,16 +7,16 @@ const express = require("express");
 //   updateUserCtrl,
 //   deleteUsersCtrl,
 //   fetchUserDetailsCtrl,
-// } = require("../../controllers/users/usersCtrl");
+// } = require("../../controllers/users/usersCtrl")
 
-const { registerUser, fetchUsersCtrl } = require("../../controllers/users/usersCtrl");
+const { registerUser, fetchUsersCtrl, loginUserCtrl } = require("../../controllers/users/usersCtrl");
 // const authMiddleware = require("../../middlewares/auth/authMiddleware");
 
 const userRoute = express.Router();
 
 userRoute.post("/register", registerUser);
 userRoute.get('/',fetchUsersCtrl);
-// userRoutes.post("/login", loginUserCtrl);
+userRoute.post("/login", loginUserCtrl);
 
 // userRoutes.get("/", authMiddleware, fetchUsersCtrl);
 // userRoutes.get("/profile/", authMiddleware, userProfileCtrl);

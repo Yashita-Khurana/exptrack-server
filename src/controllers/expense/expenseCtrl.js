@@ -1,5 +1,7 @@
 const expressAsyncHandler = require('express-async-handler');
 const Expense = require('../../model/Expense');
+const mongoosePaginate = require("mongoose-paginate-v2")
+
 
 
 //create
@@ -18,8 +20,9 @@ const createExpCtrl=expressAsyncHandler(async(req,res)=>{
 
 //fetch all expenses
 const fetchAllExpCtrl=expressAsyncHandler(async(req,res)=>{
+    const {page} = req.query;
      try{
-      const expense=await Expense.find();
+      const expense=await Expense.paginate({},{ limit : 3, page: Number(page)});
      res.json(expense);
      }catch(error){
       res.json(error);

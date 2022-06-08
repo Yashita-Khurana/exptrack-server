@@ -3,7 +3,7 @@ const express = require('express');
 
 //requiring the registerUser function from userCtrl.js to pass in the post req.
 const {registerUser} = require('./controllers/users/usersCtrl');
-const errorHandler = require("./middlewares/errorMiddleware");
+const {errorHandler,notFound} = require("./middlewares/errorMiddleware");
 const userRoute = require('./routes/users/usersRoute');
 const dotenv=require("dotenv");
 //importing the database into the server
@@ -37,6 +37,8 @@ app.use('/api/income',incomeRoute);
 //expense Routes
 app.use('/api/expenses',expenseRoute);
 
+//404 error
+app.use(notFound);
 //error
 app.use(errorHandler);
 

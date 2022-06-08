@@ -8,4 +8,11 @@ const errorHandler=(err,req,res,next)=>{
     });
   };
   
-  module.exports=errorHandler;
+  //api not found (404 ERROR)
+const notFound=(req,res,next)=>{
+    const error=new Error(`Not found -${req?.originalUrl}`);
+    res.status(404);
+    next(error);
+}
+  
+  module.exports={errorHandler,notFound};
