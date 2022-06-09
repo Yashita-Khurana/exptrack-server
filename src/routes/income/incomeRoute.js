@@ -6,11 +6,11 @@ const authMiddleware = require('../../middlewares/authMiddleware');
 
 const incomeRoute = express.Router();
 
-incomeRoute.post("/",createIncCtrl);
+incomeRoute.post("/",authMiddleware,createIncCtrl);
 incomeRoute.get('/',authMiddleware,fetchAllIncCtrl);
-incomeRoute.get('/:id',fetchIncDetailsCtrl);
-incomeRoute.put("/:id",updateIncCtrl);
-incomeRoute.delete("/:id",deleteIncCtrl);
+incomeRoute.get('/:id',authMiddleware,fetchIncDetailsCtrl);
+incomeRoute.put("/:id",authMiddleware,updateIncCtrl);
+incomeRoute.delete("/:id",authMiddleware,deleteIncCtrl);
 
 
 module.exports = incomeRoute;

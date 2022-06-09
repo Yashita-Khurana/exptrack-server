@@ -42,22 +42,26 @@ const authMiddleware = expressAsyncHandler(async (req, res, next) => {
 
   if (req?.headers?.authorization?.startsWith("Bearer")) {
     token = req?.headers?.authorization?.split(" ")[1];
-    console.log(token);
 
     try 
     {
       if(token) 
       {
-        console.log("working");
         const decoded = jwt.verify(token, process.env.JWT_KEY);
         console.log(decoded);
+        //find the user
+        const user= await User.findById(decoded?.id);
+        //attach the user to the req object
+        req.user = user;
         next();
       }
     }
      catch (error) {
       throw new Error("Not authorized token expired, login again");
     }
-  } 
+  } else{
+    throw new Error("There's no token attached to the headers");
+ }
 });
 
 module.exports = authMiddleware;

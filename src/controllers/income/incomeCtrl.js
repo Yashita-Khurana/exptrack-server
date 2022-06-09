@@ -1,6 +1,5 @@
 const expressAsyncHandler = require('express-async-handler');
 const Income = require('../../model/Income');
-const mongoosePaginate = require("mongoose-paginate-v2")
 
 //create
 const createIncCtrl=expressAsyncHandler(async(req,res)=>{
@@ -18,6 +17,7 @@ const createIncCtrl=expressAsyncHandler(async(req,res)=>{
 
 //fetch all incomes
 const fetchAllIncCtrl=expressAsyncHandler(async(req,res)=>{
+    console.log(req?.user);
     const {page} = req.query;
      try{
       const income=await Income.paginate({},{ limit : 3, page: Number(page)});
@@ -27,7 +27,7 @@ const fetchAllIncCtrl=expressAsyncHandler(async(req,res)=>{
      }
  });
 
- //fetch single incomes
+ //fetch single income
 const fetchIncDetailsCtrl=expressAsyncHandler(async(req,res)=>{
     const {id} = req?.params;
 
